@@ -1,0 +1,6 @@
+
+<app-product-detail *ngFor="let product of products" [detail]="product"
+ (remove)="handleRemove($event)">
+</app-product-detail>
+
+<button (click)="handleReset()">Reset</button>

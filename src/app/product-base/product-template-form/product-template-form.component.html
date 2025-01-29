@@ -1,0 +1,9 @@
+
+<form #form="ngForm">
+    <input *ngIf="!product" type="text" name="name" placeholder="Temporary Name">
+    <input *ngIf="product" type="text" name="name" [(ngModel)]="product.name">
+    <input *ngIf="!product" type="text" name="price" placeholder="0">
+    <input *ngIf="product" type="text" name="price" [(ngModel)]="product.price">
+</form>
+
+MODEL: {{ product | json}}
