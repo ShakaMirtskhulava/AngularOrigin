@@ -1,9 +1,24 @@
 
-<form #form="ngForm">
-    <input *ngIf="!product" type="text" name="name" placeholder="Temporary Name">
-    <input *ngIf="product" type="text" name="name" [(ngModel)]="product.name">
-    <input *ngIf="!product" type="text" name="price" placeholder="0">
-    <input *ngIf="product" type="text" name="price" [(ngModel)]="product.price">
+<form #productForm="ngForm" (ngSubmit)="createProduct(productForm)">
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" [(ngModel)]="newProduct.name" required>
+  </div>
+  <div>
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" [(ngModel)]="newProduct.price" required min="0">
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" [(ngModel)]="newProduct.description" required></textarea>
+  </div>
+  <div>
+    <label for="stock">Stock:</label>
+    <input type="number" id="stock" name="stock" [(ngModel)]="newProduct.stock" required min="0">
+  </div>
+  <div>
+    <label for="image">Image URL:</label>
+    <input type="url" id="image" name="image" [(ngModel)]="newProduct.images[0].url" required>
+  </div>
+  <button type="submit" [disabled]="!productForm.valid">Create Product</button>
 </form>
-
-MODEL: {{ product | json}}

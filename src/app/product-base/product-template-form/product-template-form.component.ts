@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ProductService } from '../../Services/product.service';
 import { Product } from '../../models/product';
 
@@ -11,8 +12,31 @@ import { Product } from '../../models/product';
 export class ProductTemplateFormComponent implements OnInit {
 
   product!: Product;
+  favouriteProductName!: string;
+  newProduct: Product = {
+    id: '',
+    name: '',
+    price: 0,
+    description: '',
+    stock: 0,
+    images: [{ url: '' }]
+  };
 
   constructor(private productService: ProductService) {
+  }
+
+  createProduct(form: NgForm) {
+    if (form.valid) {
+      this.newProduct.id = this.generateGUID();
+      console.log('Product created: ', this.newProduct);
+    }
+  }
+
+  generateGUID(): string {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 
   ngOnInit() {
